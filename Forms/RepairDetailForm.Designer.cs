@@ -35,8 +35,6 @@
             this.labelExpirationDate = new System.Windows.Forms.Label();
             this.dataGridViewItems = new System.Windows.Forms.DataGridView();
             this.contextMenuStripItems = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.detailToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.addItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +48,6 @@
             this.labelMaster = new System.Windows.Forms.Label();
             this.dataGridViewMasters = new System.Windows.Forms.DataGridView();
             this.contextMenuStripMasters = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.detailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.addMastersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editMastersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeMastersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +74,7 @@
             this.helperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
             this.contextMenuStripItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMasters)).BeginInit();
@@ -128,55 +125,46 @@
             // 
             // dataGridViewItems
             // 
+            this.dataGridViewItems.AllowUserToAddRows = false;
             this.dataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewItems.ContextMenuStrip = this.contextMenuStripItems;
             this.dataGridViewItems.Location = new System.Drawing.Point(12, 132);
             this.dataGridViewItems.Name = "dataGridViewItems";
-            this.dataGridViewItems.ReadOnly = true;
             this.dataGridViewItems.Size = new System.Drawing.Size(776, 281);
             this.dataGridViewItems.TabIndex = 4;
+            this.dataGridViewItems.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewItems_CellBeginEdit);
+            this.dataGridViewItems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewItems_CellEndEdit);
+            this.dataGridViewItems.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewItems_CellEnter);
+            this.dataGridViewItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewItems_EditingControlShowing);
+            this.dataGridViewItems.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridViewItems_UserDeletingRow);
             // 
             // contextMenuStripItems
             // 
             this.contextMenuStripItems.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.detailToolStripMenuItem1,
-            this.toolStripSeparator5,
             this.addItemsToolStripMenuItem,
             this.editItemsToolStripMenuItem,
             this.removeItemsToolStripMenuItem});
             this.contextMenuStripItems.Name = "contextMenuStripItems";
-            this.contextMenuStripItems.Size = new System.Drawing.Size(137, 98);
-            // 
-            // detailToolStripMenuItem1
-            // 
-            this.detailToolStripMenuItem1.Name = "detailToolStripMenuItem1";
-            this.detailToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
-            this.detailToolStripMenuItem1.Text = "Подробнее";
-            this.detailToolStripMenuItem1.Click += new System.EventHandler(this.detailToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(133, 6);
+            this.contextMenuStripItems.Size = new System.Drawing.Size(129, 70);
             // 
             // addItemsToolStripMenuItem
             // 
             this.addItemsToolStripMenuItem.Name = "addItemsToolStripMenuItem";
-            this.addItemsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.addItemsToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.addItemsToolStripMenuItem.Text = "Добавить";
             this.addItemsToolStripMenuItem.Click += new System.EventHandler(this.buttonAddItem_Click);
             // 
             // editItemsToolStripMenuItem
             // 
             this.editItemsToolStripMenuItem.Name = "editItemsToolStripMenuItem";
-            this.editItemsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editItemsToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.editItemsToolStripMenuItem.Text = "Изменить";
             this.editItemsToolStripMenuItem.Click += new System.EventHandler(this.buttonEditItem_Click);
             // 
             // removeItemsToolStripMenuItem
             // 
             this.removeItemsToolStripMenuItem.Name = "removeItemsToolStripMenuItem";
-            this.removeItemsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.removeItemsToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.removeItemsToolStripMenuItem.Text = "Удалить";
             this.removeItemsToolStripMenuItem.Click += new System.EventHandler(this.buttonRemoveItem_Click);
             // 
@@ -262,54 +250,45 @@
             // 
             // dataGridViewMasters
             // 
+            this.dataGridViewMasters.AllowUserToAddRows = false;
             this.dataGridViewMasters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMasters.ContextMenuStrip = this.contextMenuStripMasters;
             this.dataGridViewMasters.Location = new System.Drawing.Point(12, 448);
             this.dataGridViewMasters.Name = "dataGridViewMasters";
-            this.dataGridViewMasters.ReadOnly = true;
             this.dataGridViewMasters.Size = new System.Drawing.Size(776, 141);
             this.dataGridViewMasters.TabIndex = 9;
+            this.dataGridViewMasters.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewMasters_CellBeginEdit);
+            this.dataGridViewMasters.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMasters_CellEndEdit);
+            this.dataGridViewMasters.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridViewMasters_EditingControlShowing);
+            this.dataGridViewMasters.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridViewMasters_UserDeletingRow);
             // 
             // contextMenuStripMasters
             // 
             this.contextMenuStripMasters.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.detailToolStripMenuItem,
-            this.toolStripSeparator4,
             this.addMastersToolStripMenuItem,
             this.editMastersToolStripMenuItem,
             this.removeMastersToolStripMenuItem});
             this.contextMenuStripMasters.Name = "contextMenuStripItems";
-            this.contextMenuStripMasters.Size = new System.Drawing.Size(137, 98);
-            // 
-            // detailToolStripMenuItem
-            // 
-            this.detailToolStripMenuItem.Name = "detailToolStripMenuItem";
-            this.detailToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.detailToolStripMenuItem.Text = "Подробнее";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(133, 6);
+            this.contextMenuStripMasters.Size = new System.Drawing.Size(129, 70);
             // 
             // addMastersToolStripMenuItem
             // 
             this.addMastersToolStripMenuItem.Name = "addMastersToolStripMenuItem";
-            this.addMastersToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.addMastersToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.addMastersToolStripMenuItem.Text = "Добавить";
             this.addMastersToolStripMenuItem.Click += new System.EventHandler(this.buttonAddMaster_Click);
             // 
             // editMastersToolStripMenuItem
             // 
             this.editMastersToolStripMenuItem.Name = "editMastersToolStripMenuItem";
-            this.editMastersToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editMastersToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.editMastersToolStripMenuItem.Text = "Изменить";
             this.editMastersToolStripMenuItem.Click += new System.EventHandler(this.buttonEditMaster_Click);
             // 
             // removeMastersToolStripMenuItem
             // 
             this.removeMastersToolStripMenuItem.Name = "removeMastersToolStripMenuItem";
-            this.removeMastersToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.removeMastersToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.removeMastersToolStripMenuItem.Text = "Удалить";
             this.removeMastersToolStripMenuItem.Click += new System.EventHandler(this.buttonRemoveMaster_Click);
             // 
@@ -497,6 +476,10 @@
             this.aboutProgramToolStripMenuItem.Text = "О программе...";
             this.aboutProgramToolStripMenuItem.Click += new System.EventHandler(this.aboutProgramToolStripMenuItem_Click);
             // 
+            // toolTip
+            // 
+            this.toolTip.AutomaticDelay = 1000;
+            // 
             // RepairDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +502,7 @@
             this.Controls.Add(this.labelStartDate);
             this.Controls.Add(this.textBoxNotes);
             this.Controls.Add(this.labelRepairName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "RepairDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Детальная информация ремонта";
@@ -581,9 +565,6 @@
         private System.Windows.Forms.ToolStripMenuItem addMastersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editMastersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeMastersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem detailToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem detailToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

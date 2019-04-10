@@ -1,0 +1,15 @@
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Forms.AboutProgram.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Forms.EditRepairForm.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Forms.ItemsForm.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Form1.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Forms.MastersForm.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Forms.MidContainerForm.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Forms.RepairDetailForm.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Migrations.InitialCreate.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Migrations.MigrateDB.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Migrations.ChangeStrWarrantyUpTo.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Migrations.ChangeIntWarrantyUpTo.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Migrations.ChangeMaster.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.Properties.Resources.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.csproj.GenerateResource.cache
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Release\RepairPlanning.csproj.CoreCompileInputs.cache

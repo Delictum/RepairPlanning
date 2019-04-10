@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelNameItem = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.comboBoxShop = new System.Windows.Forms.ComboBox();
@@ -47,9 +49,8 @@
             this.buttonApply = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.detailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -58,10 +59,28 @@
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.ContextMenuStrip = this.contextMenuStrip;
-            this.dataGridView.Location = new System.Drawing.Point(12, 59);
+            this.dataGridView.Location = new System.Drawing.Point(12, 87);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(776, 379);
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.ShowCellToolTips = false;
+            this.dataGridView.Size = new System.Drawing.Size(776, 351);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEnter);
+            this.dataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEnter);
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(127, 26);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.addToolStripMenuItem.Text = "Добавить";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // labelNameItem
             // 
@@ -84,7 +103,7 @@
             this.comboBoxShop.FormattingEnabled = true;
             this.comboBoxShop.Location = new System.Drawing.Point(448, 5);
             this.comboBoxShop.Name = "comboBoxShop";
-            this.comboBoxShop.Size = new System.Drawing.Size(116, 21);
+            this.comboBoxShop.Size = new System.Drawing.Size(108, 21);
             this.comboBoxShop.TabIndex = 3;
             this.comboBoxShop.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxWarrantyUpTo_KeyPress);
             // 
@@ -100,7 +119,7 @@
             // labelWarrantyUpTo
             // 
             this.labelWarrantyUpTo.AutoSize = true;
-            this.labelWarrantyUpTo.Location = new System.Drawing.Point(570, 9);
+            this.labelWarrantyUpTo.Location = new System.Drawing.Point(562, 9);
             this.labelWarrantyUpTo.Name = "labelWarrantyUpTo";
             this.labelWarrantyUpTo.Size = new System.Drawing.Size(95, 13);
             this.labelWarrantyUpTo.TabIndex = 6;
@@ -120,9 +139,9 @@
             "30",
             "36",
             "60"});
-            this.comboBoxWarrantyUpTo.Location = new System.Drawing.Point(671, 6);
+            this.comboBoxWarrantyUpTo.Location = new System.Drawing.Point(663, 6);
             this.comboBoxWarrantyUpTo.Name = "comboBoxWarrantyUpTo";
-            this.comboBoxWarrantyUpTo.Size = new System.Drawing.Size(36, 21);
+            this.comboBoxWarrantyUpTo.Size = new System.Drawing.Size(44, 21);
             this.comboBoxWarrantyUpTo.TabIndex = 5;
             this.comboBoxWarrantyUpTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxWarrantyUpTo_KeyPress);
             // 
@@ -177,22 +196,22 @@
             // 
             this.textBoxPriceFrom.Location = new System.Drawing.Point(448, 32);
             this.textBoxPriceFrom.Name = "textBoxPriceFrom";
-            this.textBoxPriceFrom.Size = new System.Drawing.Size(94, 20);
+            this.textBoxPriceFrom.Size = new System.Drawing.Size(108, 20);
             this.textBoxPriceFrom.TabIndex = 12;
             this.textBoxPriceFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPriceFrom_KeyPress);
             // 
             // textBoxPriceTo
             // 
-            this.textBoxPriceTo.Location = new System.Drawing.Point(570, 32);
+            this.textBoxPriceTo.Location = new System.Drawing.Point(608, 31);
             this.textBoxPriceTo.Name = "textBoxPriceTo";
-            this.textBoxPriceTo.Size = new System.Drawing.Size(94, 20);
+            this.textBoxPriceTo.Size = new System.Drawing.Size(99, 20);
             this.textBoxPriceTo.TabIndex = 13;
             this.textBoxPriceTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPriceTo_KeyPress);
             // 
             // labelPriceTo
             // 
             this.labelPriceTo.AutoSize = true;
-            this.labelPriceTo.Location = new System.Drawing.Point(545, 35);
+            this.labelPriceTo.Location = new System.Drawing.Point(570, 35);
             this.labelPriceTo.Name = "labelPriceTo";
             this.labelPriceTo.Size = new System.Drawing.Size(19, 13);
             this.labelPriceTo.TabIndex = 14;
@@ -220,38 +239,33 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(671, 29);
+            this.buttonAdd.Location = new System.Drawing.Point(713, 58);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(36, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 17;
-            this.buttonAdd.Text = "+";
+            this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // contextMenuStrip
+            // toolTip
             // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.detailToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(137, 48);
+            this.toolTip.AutomaticDelay = 1000;
             // 
-            // addToolStripMenuItem
+            // button1
             // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addToolStripMenuItem.Text = "Добавить";
-            // 
-            // detailToolStripMenuItem
-            // 
-            this.detailToolStripMenuItem.Name = "detailToolStripMenuItem";
-            this.detailToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.detailToolStripMenuItem.Text = "Подробнее";
+            this.button1.Location = new System.Drawing.Point(15, 58);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Добавить";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // ItemsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonApply);
@@ -301,6 +315,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem detailToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button button1;
     }
 }

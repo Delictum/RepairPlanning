@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using RepairPlanning.Models;
 using RepairPlanning.Util;
@@ -13,8 +14,12 @@ namespace RepairPlanning.Forms
 
         private readonly Repair _repair;
         private readonly Form _parent;
+        private readonly Label _totaLabel;
+        private readonly List<double> _totalPrice;
+        private readonly List<int> _totalAmount;
+        private int _currentPage = 0;
 
-        public ItemsForm(Form parent, Repair repair)
+        public ItemsForm(Form parent, Repair repair, Label totaLabel, List<double> totalPrice, List<int> totalAmount)
         {
             InitializeComponent();
 
@@ -22,6 +27,10 @@ namespace RepairPlanning.Forms
             MdiParent = _parent;
             _repair = repair;
             LoadData();
+
+            _totaLabel = totaLabel;
+            _totalPrice = totalPrice;
+            _totalAmount = totalAmount;
         }
 
         private void LoadData()
@@ -44,9 +53,12 @@ namespace RepairPlanning.Forms
                 var shops = db.Shops.ToList();
                 shops.Insert(0, new Shop { Id = 0, Name = "Все" });
 
-                comboBoxShop.DataSource = itemCategories;
+                comboBoxShop.DataSource = shops;
                 comboBoxShop.DisplayMember = "Name";
                 comboBoxShop.ValueMember = "Id";
+
+                comboBoxType.Text = "Все";
+                comboBoxWarrantyUpTo.Text = "Любая";
             }
         }
 
@@ -65,6 +77,7 @@ namespace RepairPlanning.Forms
             {
                 db.ItemCategories.ToList();
                 db.TypeItems.ToList();
+                db.Shops.ToList();
 
                 if (itemList == null)
                 {
@@ -155,7 +168,10 @@ namespace RepairPlanning.Forms
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            Helpers.CorrectionFilterPrice(textBoxPriceFrom, textBoxPriceTo);
+            if (!Helpers.CorrectionFilterPrice(textBoxPriceFrom, textBoxPriceTo))
+            {
+                return;
+            }
 
             List<Item> itemList = null;
 
@@ -164,6 +180,7 @@ namespace RepairPlanning.Forms
                 IQueryable<Item> dbItems = db.Items;
                 db.ItemCategories.ToList();
                 db.TypeItems.ToList();
+                db.Shops.ToList();
 
                 if (!string.IsNullOrEmpty(textBoxName.Text))
                 {
@@ -180,10 +197,16 @@ namespace RepairPlanning.Forms
                     }
                 }
 
-                if (!comboBoxType.Text.Contains("Любая"))
+                if (!comboBoxWarrantyUpTo.Text.Contains("Любая"))
                 {
                     var warrantyUpTo = int.Parse(comboBoxWarrantyUpTo.Text);
                     dbItems = dbItems.Where(x => x.WarrantyUpTo >= warrantyUpTo);
+                }
+
+                if (!comboBoxShop.Text.Contains("Все"))
+                {
+                    var shop = comboBoxShop.Text;
+                    dbItems = dbItems.Where(x => x.Shop.Name.Contains(shop));
                 }
 
                 if (!string.IsNullOrEmpty(textBoxPriceFrom.Text))
@@ -208,6 +231,107 @@ namespace RepairPlanning.Forms
             }
 
             LoadDataGridView(itemList);
+        }
+
+        private void dataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            ShowToolTip(e);
+        }
+
+        private void ShowToolTip(DataGridViewCellEventArgs e)
+        {
+            switch (dataGridView.CurrentCell.ColumnIndex)
+            {
+                case 2:
+                {
+                    var cellDisplayRect = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                    var shopName = dataGridView.CurrentCell.Value.ToString();
+                    using (var db = new ModelsContext())
+                    {
+                        var shop = db.Shops.First(x => x.Name.Contains(shopName));
+
+                        toolTip.Show(
+                            new StringBuilder().Append("Адрес: ").Append(shop.Address).Append("\nТелефон: ")
+                                .Append(shop.PhoneNumber).ToString(),
+                            dataGridView,
+                            cellDisplayRect.X + dataGridView.CurrentCell.Size.Width / 2,
+                            cellDisplayRect.Y + dataGridView.CurrentCell.Size.Height / 2,
+                            2000);
+                        dataGridView.ShowCellToolTips = false;
+                    }
+
+                    break;
+                }
+                case 1:
+                {
+                    var cellDisplayRect = dataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                    var nameItem = dataGridView.CurrentCell.Value.ToString();
+                    using (var db = new ModelsContext())
+                    {
+                        var item = db.Items.First(x => x.Name.Contains(nameItem));
+
+                        toolTip.Show(
+                            new StringBuilder().Append("Описание: ").Append(item.Description).ToString(),
+                            dataGridView,
+                            cellDisplayRect.X + dataGridView.CurrentCell.Size.Width / 2,
+                            cellDisplayRect.Y + dataGridView.CurrentCell.Size.Height / 2,
+                            2000);
+                        dataGridView.ShowCellToolTips = false;
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            var inputBox = new InputBox.InputBox("Количество предметов", "Введите количество: ", string.Empty, true);
+
+            var valueInputBox = inputBox.ToString();
+            if (string.IsNullOrEmpty(valueInputBox) || int.Parse(valueInputBox) == 0)
+            {
+                return;
+            }
+
+            var currentItemId = dataGridView.CurrentRow.Cells[0].Value.ToString();
+            if (string.IsNullOrEmpty(currentItemId))
+            {
+                MessageBox.Show("Выделите строку для добавления предмета.");
+            }
+
+            using (var db = new ModelsContext())
+            {
+                var itemId = int.Parse(currentItemId);
+                var amountItem = int.Parse(valueInputBox);
+
+                var repairItem = db.RepairItems.FirstOrDefault(x => x.ItemId == itemId && x.RepairId == _repair.Id);
+                if (repairItem == null)
+                {
+                    db.RepairItems.Add(new RepairItem
+                    {
+                        RepairId = _repair.Id,
+                        AmountItem = amountItem,
+                        ItemId = itemId
+                    });
+                }
+                else
+                {
+                    repairItem.AmountItem += amountItem;
+                }
+                
+                db.SaveChanges();
+
+                var priceItem = db.Items.First(x => x.Id == itemId).Price;
+
+                _totalPrice[0] += priceItem * amountItem;
+                _totalAmount[0] += amountItem; 
+                _totaLabel.Text = new StringBuilder().Append("Стоимость предметов: ").Append(_totalPrice[0])
+                    .Append(", общее кол-во предметов: ").Append(_totalAmount[0]).Append(
+                        "                                                                      стоимость работы мастеров: ")
+                    .Append(_totalPrice[1]).Append(", общая продолжительность работы (в днях): ").Append(_totalAmount[1])
+                    .ToString();
+            }
         }
     }
 }

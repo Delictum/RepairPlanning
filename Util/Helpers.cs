@@ -70,21 +70,23 @@ namespace RepairPlanning.Util
             }
         }
 
-        public static void CorrectionFilterPrice(TextBox textBoxPriceFrom, TextBox textBoxPriceTo)
+        public static bool CorrectionFilterPrice(TextBox textBoxPriceFrom, TextBox textBoxPriceTo)
         {
             CorrectionPrice(textBoxPriceFrom);
             CorrectionPrice(textBoxPriceTo);
 
             if (string.IsNullOrEmpty(textBoxPriceFrom.Text) || string.IsNullOrEmpty(textBoxPriceTo.Text))
             {
-                return;
+                return true;
             }
 
             if (double.Parse(textBoxPriceFrom.Text) > double.Parse(textBoxPriceTo.Text))
             {
                 MessageBox.Show("Начальная сумма должна быть меньше конечной.");
-                return;
+                return false;
             }
+
+            return true;
         }
     }
 }

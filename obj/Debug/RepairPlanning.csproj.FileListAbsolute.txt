@@ -12,7 +12,6 @@ C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanni
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.csproj.CopyComplete
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.exe
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.pdb
-C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Form1.resources
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Migrations.InitialCreate.resources
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Migrations.MigrateDB.resources
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Forms.EditRepairForm.resources
@@ -23,3 +22,7 @@ C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanni
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Forms.MastersForm.resources
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Migrations.ChangeStrWarrantyUpTo.resources
 C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Migrations.ChangeIntWarrantyUpTo.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.Migrations.ChangeMaster.resources
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\bin\Debug\InputBox.dll
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\bin\Debug\InputBox.pdb
+C:\Users\thedr\source\repos\RepairPlanning\RepairPlanning\obj\Debug\RepairPlanning.ListRepairsForm.resources

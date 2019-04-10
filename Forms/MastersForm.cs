@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using RepairPlanning.Models;
 using RepairPlanning.Util;
@@ -12,8 +13,11 @@ namespace RepairPlanning.Forms
 
         private readonly Repair _repair;
         private readonly Form _parent;
+        private readonly Label _totaLabel;
+        private readonly List<double> _totalPrice;
+        private readonly List<int> _totalAmount;
 
-        public MastersForm(Form parent, Repair repair)
+        public MastersForm(Form parent, Repair repair, Label totaLabel, List<double> totalPrice, List<int> totalAmount)
         {
             InitializeComponent();
 
@@ -21,6 +25,11 @@ namespace RepairPlanning.Forms
             MdiParent = _parent;
             _repair = repair;
             LoadData();
+            comboBoxExpiarence.Text = "Любой";
+
+            _totaLabel = totaLabel;
+            _totalPrice = totalPrice;
+            _totalAmount = totalAmount;
         }
 
         private void LoadData(IReadOnlyCollection<Master> masterList = null)
@@ -40,7 +49,7 @@ namespace RepairPlanning.Forms
                 {
                     foreach (var master in db.Masters)
                     {
-                        dataGridView.Rows.Add(master.MasterId, master.Specialization, master.PhoneNumber,
+                        dataGridView.Rows.Add(master.MasterId, master.Name, master.PhoneNumber,
                             master.Expiarence, master.Price);
                     }
                 }
@@ -48,7 +57,7 @@ namespace RepairPlanning.Forms
                 {
                     foreach (var master in masterList)
                     {
-                        dataGridView.Rows.Add(master.MasterId, master.Specialization, master.PhoneNumber,
+                        dataGridView.Rows.Add(master.MasterId, master.Name, master.PhoneNumber,
                             master.Expiarence, master.Price);
                     }
                 }
@@ -57,7 +66,7 @@ namespace RepairPlanning.Forms
             dataGridView.Columns[0].Visible = false;
 
             dataGridView.Columns[1].Width = 180;
-            dataGridView.Columns[1].HeaderText = "Специализация";
+            dataGridView.Columns[1].HeaderText = "Название";
 
             dataGridView.Columns[2].Width = 100;
             dataGridView.Columns[2].HeaderText = "Телефонный номер";
@@ -85,7 +94,10 @@ namespace RepairPlanning.Forms
 
         private void buttonApply_Click(object sender, System.EventArgs e)
         {
-            Helpers.CorrectionFilterPrice(textBoxPriceFrom, textBoxPriceTo);
+            if (!Helpers.CorrectionFilterPrice(textBoxPriceFrom, textBoxPriceTo))
+            {
+                return;
+            }
 
             List<Master> masterList = null;
 
@@ -97,7 +109,7 @@ namespace RepairPlanning.Forms
 
                 if (!string.IsNullOrEmpty(textBoxSpecialization.Text))
                 {
-                    dbMasters = dbMasters.Where(x => x.Specialization.Contains(textBoxSpecialization.Text));
+                    dbMasters = dbMasters.Where(x => x.Name.Contains(textBoxSpecialization.Text));
                 }
 
                 if (!comboBoxExpiarence.Text.Contains("Любой"))
@@ -132,5 +144,55 @@ namespace RepairPlanning.Forms
 
         private void textBoxPriceFrom_KeyPress(object sender, KeyPressEventArgs e) =>
             Helpers.ValidPriceData(textBoxPriceFrom, e);
+
+        private void buttonAdd_Click(object sender, System.EventArgs e)
+        {
+            var inputBox = new InputBox.InputBox("Количество дней работы", "Введите дни: ", string.Empty, true);
+
+            var valueInputBox = inputBox.ToString();
+            if (string.IsNullOrEmpty(valueInputBox) || int.Parse(valueInputBox) == 0)
+            {
+                return;
+            }
+
+            var currentMasterId = dataGridView.CurrentRow.Cells[0].Value.ToString();
+            if (string.IsNullOrEmpty(currentMasterId))
+            {
+                MessageBox.Show("Выделите строку для добавления мастера.");
+            }
+
+            using (var db = new ModelsContext())
+            {
+                var masterId = int.Parse(currentMasterId);
+                var amountDayOfWorks = int.Parse(valueInputBox);
+
+                var repairMaster = db.RepairMasters.FirstOrDefault(x => x.MasterId == masterId && x.RepairId == _repair.Id);
+                if (repairMaster == null)
+                {
+                    db.RepairMasters.Add(new RepairMaster
+                    {
+                        RepairId = _repair.Id,
+                        DaysOfWork = amountDayOfWorks,
+                        MasterId = masterId
+                    });
+                }
+                else
+                {
+                    repairMaster.DaysOfWork += amountDayOfWorks;
+                }
+
+                db.SaveChanges();
+
+                var priceMaster = db.Masters.First(x => x.MasterId == masterId).Price;
+
+                _totalPrice[1] += priceMaster * amountDayOfWorks;
+                _totalAmount[1] += amountDayOfWorks;
+                _totaLabel.Text = new StringBuilder().Append("Стоимость предметов: ").Append(_totalPrice[0])
+                    .Append(", общее кол-во предметов: ").Append(_totalAmount[0]).Append(
+                        "                                                                      стоимость работы мастеров: ")
+                    .Append(_totalPrice[1]).Append(", общая продолжительность работы (в днях): ").Append(_totalAmount[1])
+                    .ToString();
+            }
+        }
     }
 }

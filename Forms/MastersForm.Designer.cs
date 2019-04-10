@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelSpecialization = new System.Windows.Forms.Label();
             this.textBoxSpecialization = new System.Windows.Forms.TextBox();
             this.labelExpiarence = new System.Windows.Forms.Label();
@@ -41,9 +43,6 @@
             this.textBoxPriceTo = new System.Windows.Forms.TextBox();
             this.textBoxPriceFrom = new System.Windows.Forms.TextBox();
             this.labelPriceFrom = new System.Windows.Forms.Label();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.detailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -54,17 +53,32 @@
             this.dataGridView.ContextMenuStrip = this.contextMenuStrip;
             this.dataGridView.Location = new System.Drawing.Point(12, 61);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
             this.dataGridView.Size = new System.Drawing.Size(455, 377);
             this.dataGridView.TabIndex = 1;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.addToolStripMenuItem.Text = "Добавить";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // labelSpecialization
             // 
             this.labelSpecialization.AutoSize = true;
             this.labelSpecialization.Location = new System.Drawing.Point(12, 9);
             this.labelSpecialization.Name = "labelSpecialization";
-            this.labelSpecialization.Size = new System.Drawing.Size(86, 13);
+            this.labelSpecialization.Size = new System.Drawing.Size(83, 13);
             this.labelSpecialization.TabIndex = 2;
-            this.labelSpecialization.Text = "Специализация";
+            this.labelSpecialization.Text = "Наименование";
             // 
             // textBoxSpecialization
             // 
@@ -107,6 +121,7 @@
             this.buttonAdd.TabIndex = 24;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonReset
             // 
@@ -162,26 +177,6 @@
             this.labelPriceFrom.TabIndex = 18;
             this.labelPriceFrom.Text = "Цена от";
             // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.detailToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(137, 48);
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.addToolStripMenuItem.Text = "Добавить";
-            // 
-            // detailToolStripMenuItem
-            // 
-            this.detailToolStripMenuItem.Name = "detailToolStripMenuItem";
-            this.detailToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.detailToolStripMenuItem.Text = "Подробнее";
-            // 
             // MastersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,6 +219,5 @@
         private System.Windows.Forms.Label labelPriceFrom;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem detailToolStripMenuItem;
     }
 }

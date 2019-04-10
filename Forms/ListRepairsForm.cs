@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using RepairPlanning.Forms;
+using RepairPlanning.Models;
+using RepairPlanning.Util;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using RepairPlanning.Forms;
-using RepairPlanning.Models;
-using RepairPlanning.Util;
 
 namespace RepairPlanning
 {
-    public partial class Form1 : Form
+    public partial class ListRepairsForm : Form
     {
-        private readonly Panel _parent;
+        private Panel _parent;
         private int _xPositionPanel;
         private int _currentCountRepairs = 0;
 
-        public Form1()
+        public ListRepairsForm()
         {
             InitializeComponent();
 
@@ -38,6 +36,7 @@ namespace RepairPlanning
 
                 _xPositionPanel = 10;
                 _parent.Controls.Clear();
+
                 foreach (var repair in repairs)
                 {
                     LoadRepair(repair);
@@ -168,7 +167,7 @@ namespace RepairPlanning
         private void RemoveRepair(object sender, EventArgs e)
         {
             if (MessageBox.Show(
-                    "Действительно удалить ремонт?",
+                    "Удалить ремонт?",
                     "Подтвердите действие", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 using (var db = new ModelsContext())
@@ -177,16 +176,15 @@ namespace RepairPlanning
                     var idRepair = int.Parse(thisButton.Name.Replace("buttonRemoveRepair", ""));
 
                     var repirItem = db.RepairItems.FirstOrDefault(x => x.RepairId == idRepair);
-                    if (repirItem != null)
-                    {
-                        MessageBox.Show("В ремонт входят предметы, удаление невозможно.");
-                        return;
-                    }
                     var repirMaster = db.RepairMasters.FirstOrDefault(x => x.RepairId == idRepair);
-                    if (repirMaster != null)
+                    if (repirItem != null || repirMaster != null)
                     {
-                        MessageBox.Show("В ремонт входят мастера, удаление невозможно.");
-                        return;
+                        if (MessageBox.Show(
+                                "Ремонт заполнен предметами и/или местерами. Все равно удалить?",
+                                "Действительно удалить?", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                        {
+                            return;
+                        }
                     }
 
                     var currentRepair = db.Repairs.FirstOrDefault(x => x.Id == idRepair);
@@ -217,6 +215,13 @@ namespace RepairPlanning
         private void helperToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Helpers.StartupHelper();
+        }
+
+        private void ListRepairsForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _currentCountRepairs = 0;
+            _parent.Controls.Clear();
+            Load();
         }
     }
 }

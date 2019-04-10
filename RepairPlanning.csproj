@@ -132,6 +132,10 @@
     <Compile Include="Migrations\201904081503549_ChangeIntWarrantyUpTo.Designer.cs">
       <DependentUpon>201904081503549_ChangeIntWarrantyUpTo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904091910568_ChangeMaster.cs" />
+    <Compile Include="Migrations\201904091910568_ChangeMaster.Designer.cs">
+      <DependentUpon>201904091910568_ChangeMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelsContext.cs" />
     <Compile Include="Models\Item.cs" />
@@ -181,6 +185,9 @@
     <EmbeddedResource Include="Migrations\201904081503549_ChangeIntWarrantyUpTo.resx">
       <DependentUpon>201904081503549_ChangeIntWarrantyUpTo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904091910568_ChangeMaster.resx">
+      <DependentUpon>201904091910568_ChangeMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -219,6 +226,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Warface_sample.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MessageInputBox\MessageInputBox.csproj">
+      <Project>{46B06D2B-397B-47BF-A477-B5573661BEFF}</Project>
+      <Name>MessageInputBox</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

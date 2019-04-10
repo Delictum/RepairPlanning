@@ -1,6 +1,6 @@
 ﻿namespace RepairPlanning
 {
-    partial class Form1
+    partial class ListRepairsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListRepairsForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRepairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,7 +139,7 @@
             this.mainPanel.Size = new System.Drawing.Size(800, 371);
             this.mainPanel.TabIndex = 1;
             // 
-            // Form1
+            // ListRepairsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -147,9 +147,11 @@
             this.Controls.Add(this.buttonCreateRepair);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.menuStrip);
-            this.Name = "Form1";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "ListRepairsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Планирование ремонта";
+            this.VisibleChanged += new System.EventHandler(this.ListRepairsForm_VisibleChanged);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);

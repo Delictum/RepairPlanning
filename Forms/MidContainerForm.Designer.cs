@@ -31,19 +31,20 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withMastersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.withItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.withMastersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tileHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelTotal = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,49 +76,34 @@
             this.withItemsToolStripMenuItem,
             this.withMastersToolStripMenuItem});
             this.addFormToolStripMenuItem.Name = "addFormToolStripMenuItem";
-            this.addFormToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addFormToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.addFormToolStripMenuItem.Text = "Добавить окно...";
+            // 
+            // withItemsToolStripMenuItem
+            // 
+            this.withItemsToolStripMenuItem.Name = "withItemsToolStripMenuItem";
+            this.withItemsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.withItemsToolStripMenuItem.Text = "С предметами";
+            this.withItemsToolStripMenuItem.Click += new System.EventHandler(this.withItemsToolStripMenuItem_Click);
+            // 
+            // withMastersToolStripMenuItem
+            // 
+            this.withMastersToolStripMenuItem.Name = "withMastersToolStripMenuItem";
+            this.withMastersToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.withMastersToolStripMenuItem.Text = "С мастерами";
+            this.withMastersToolStripMenuItem.Click += new System.EventHandler(this.withMastersToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(162, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.exitToolStripMenuItem.Text = "Выход";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helperToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.aboutProgramToolStripMenuItem});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.aboutToolStripMenuItem.Text = "Справка";
-            // 
-            // helperToolStripMenuItem
-            // 
-            this.helperToolStripMenuItem.Name = "helperToolStripMenuItem";
-            this.helperToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.helperToolStripMenuItem.Text = "Помощь";
-            this.helperToolStripMenuItem.Click += new System.EventHandler(this.helperToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
-            // 
-            // aboutProgramToolStripMenuItem
-            // 
-            this.aboutProgramToolStripMenuItem.Name = "aboutProgramToolStripMenuItem";
-            this.aboutProgramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutProgramToolStripMenuItem.Text = "О программе...";
-            this.aboutProgramToolStripMenuItem.Click += new System.EventHandler(this.aboutProgramToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -134,49 +120,77 @@
             this.tileVerticalToolStripMenuItem,
             this.tileHorizontalToolStripMenuItem});
             this.tileToolStripMenuItem.Name = "tileToolStripMenuItem";
-            this.tileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tileToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.tileToolStripMenuItem.Text = "Плитка...";
-            // 
-            // cascadeToolStripMenuItem
-            // 
-            this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.cascadeToolStripMenuItem.Text = "Каскад";
-            this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
-            // 
-            // withItemsToolStripMenuItem
-            // 
-            this.withItemsToolStripMenuItem.Name = "withItemsToolStripMenuItem";
-            this.withItemsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.withItemsToolStripMenuItem.Text = "С предметами";
-            this.withItemsToolStripMenuItem.Click += new System.EventHandler(this.withItemsToolStripMenuItem_Click);
-            // 
-            // withMastersToolStripMenuItem
-            // 
-            this.withMastersToolStripMenuItem.Name = "withMastersToolStripMenuItem";
-            this.withMastersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.withMastersToolStripMenuItem.Text = "С мастерами";
-            this.withMastersToolStripMenuItem.Click += new System.EventHandler(this.withMastersToolStripMenuItem_Click);
             // 
             // tileVerticalToolStripMenuItem
             // 
             this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.tileVerticalToolStripMenuItem.Text = "Вериткальная";
             this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.tileVerticalToolStripMenuItem_Click);
             // 
             // tileHorizontalToolStripMenuItem
             // 
             this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.tileHorizontalToolStripMenuItem.Text = "Горизонтальная";
             this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.tileHorizontalToolStripMenuItem_Click);
+            // 
+            // cascadeToolStripMenuItem
+            // 
+            this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.cascadeToolStripMenuItem.Text = "Каскад";
+            this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helperToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.aboutProgramToolStripMenuItem});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.aboutToolStripMenuItem.Text = "Справка";
+            // 
+            // helperToolStripMenuItem
+            // 
+            this.helperToolStripMenuItem.Name = "helperToolStripMenuItem";
+            this.helperToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.helperToolStripMenuItem.Text = "Помощь";
+            this.helperToolStripMenuItem.Click += new System.EventHandler(this.helperToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(155, 6);
+            // 
+            // aboutProgramToolStripMenuItem
+            // 
+            this.aboutProgramToolStripMenuItem.Name = "aboutProgramToolStripMenuItem";
+            this.aboutProgramToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.aboutProgramToolStripMenuItem.Text = "О программе...";
+            this.aboutProgramToolStripMenuItem.Click += new System.EventHandler(this.aboutProgramToolStripMenuItem_Click);
+            // 
+            // labelTotal
+            // 
+            this.labelTotal.BackColor = System.Drawing.SystemColors.InfoText;
+            this.labelTotal.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTotal.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.labelTotal.Location = new System.Drawing.Point(0, 889);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(1432, 23);
+            this.labelTotal.TabIndex = 19;
+            this.labelTotal.Text = "label1";
             // 
             // MidContainerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1432, 912);
+            this.Controls.Add(this.labelTotal);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.Name = "MidContainerForm";
@@ -207,5 +221,6 @@
         private System.Windows.Forms.ToolStripMenuItem withMastersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileVerticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileHorizontalToolStripMenuItem;
+        private System.Windows.Forms.Label labelTotal;
     }
 }
